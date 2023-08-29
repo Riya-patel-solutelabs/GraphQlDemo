@@ -6,5 +6,5 @@ abstract class BlogRepository {
   Future<List<BlogModel>> getBlogs();
 
   ///function to add blogs
-  Future<void> addBlogs(BlogModel blog);
+  Future<BlogModel> addBlogs(BlogModel blog);
 }

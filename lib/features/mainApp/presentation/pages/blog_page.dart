@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphqldemo/features/mainApp/presentation/cubit/blog_cubit.dart';
+import 'package:graphqldemo/features/mainApp/presentation/pages/add_blog_page.dart';
+import 'package:graphqldemo/features/mainApp/presentation/widgets/demo_main.dart';
 
 import '../widgets/blog_row.dart';
 
@@ -56,7 +58,12 @@ query Content{
                   title: const Text('GraphQl Demo Blog'),
                 ),
                 floatingActionButton: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) => AddBlogPage()));
+                  },
                   backgroundColor: Color.fromARGB(255, 4, 51, 93),
                   child: const Icon(Icons.add),
                   elevation: 10,
@@ -70,12 +77,10 @@ query Content{
                       // final dynamic excerpt = post['excerpt'];
                       // final dynamic coverUrl = post!['coverImage']['url'];
 
-
-                    
                       return BlogRow(
                         title: post.title,
                         excerpt: post.excerpt,
-                        coverUrl: post.coverImage.url,
+                        coverUrl: post.coverImage,
                         currentBlog: post,
                       );
                     }));

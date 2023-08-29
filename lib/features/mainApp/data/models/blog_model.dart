@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'author_model.dart';
-import 'content_model.dart';
 import 'coverimage_model.dart';
 
 part 'blog_model.g.dart';
@@ -27,7 +26,7 @@ class BlogModel {
   final String? id;
   final String? title;
   final String? excerpt;
-  final ContentModel? content;
+  final String? content;
   final CoverimageModel? coverImage;
   final AuthorModel? author;
 }

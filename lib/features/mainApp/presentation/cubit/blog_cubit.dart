@@ -1,9 +1,7 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:graphqldemo/features/mainApp/data/models/blog_model.dart';
 import 'package:graphqldemo/features/mainApp/domain/repositories/blog_repository.dart';
-
 
 part 'blog_state.dart';
 
@@ -19,6 +17,20 @@ class BlogCubit extends Cubit<BlogState> {
   Future<void> fetchBlogs() async {
     emit(BlogLoading());
     try {
+      final List<BlogModel> blogsList = await repository.getBlogs();
+
+      emit(BlogLoaded(blogList: blogsList));
+    } on Exception catch (e) {
+      emit(BlogFailure());
+    }
+  }
+
+  ///method to add blogs
+  Future<void> addNewBlog(BlogModel newBlog) async {
+    emit(BlogLoading());
+    try {
+      final BlogModel addedBlog= await repository.addBlogs(newBlog);
+      print(newBlog.author!.name);
       final List<BlogModel> blogsList = await repository.getBlogs();
 
       emit(BlogLoaded(blogList: blogsList));

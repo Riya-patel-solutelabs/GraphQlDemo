@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graphqldemo/core/constants/constants.dart';
 
 ///blog details page
-class BlogDetailsPage extends StatelessWidget {
+class BlogDetailsPage extends StatefulWidget {
   ///default initializer
   const BlogDetailsPage({required this.currentBlog, super.key});
 
@@ -10,20 +10,22 @@ class BlogDetailsPage extends StatelessWidget {
   final dynamic currentBlog;
 
   @override
+  State<BlogDetailsPage> createState() => _BlogDetailsPageState();
+}
+
+class _BlogDetailsPageState extends State<BlogDetailsPage> {
+  @override
   Widget build(BuildContext context) {
     // final dynamic blogTitle = currentBlog['title'];
-  
+
     // final dynamic coverUrl = currentBlog!['coverImage']['url'];
     // final dynamic author = currentBlog['author']['name'];
     // final dynamic content= currentBlog['content']['text'];
 
-
-    final dynamic blogTitle= currentBlog.title;
-    final dynamic coverUrl= currentBlog.coverImage.url;
-    final dynamic author= currentBlog.author.name;
-    final dynamic content= currentBlog.content.text;
-
-  
+    final dynamic blogTitle = widget.currentBlog.title;
+    final dynamic coverUrl = widget.currentBlog.coverImage;
+    final dynamic author = widget.currentBlog.author.name;
+    final dynamic content = widget.currentBlog.content;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -41,7 +43,7 @@ class BlogDetailsPage extends StatelessWidget {
         elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Constants.minimumPadding * 30),
+        padding: const EdgeInsets.all(Constants.minimumPadding * 3),
         child: SingleChildScrollView(
           child: Column(children: <Widget>[
             Center(
@@ -55,10 +57,10 @@ class BlogDetailsPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(9),
                   child: coverUrl != null
                       ? Image.network(
-                          coverUrl,
+                          coverUrl.url,
                           fit: BoxFit.cover,
                         )
-                      : const FlutterLogo(),
+                      : const FlutterLogo(size: Constants.minimumPadding*10,),
                 ),
               ),
             ),
@@ -69,8 +71,8 @@ class BlogDetailsPage extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Text(
                 blogTitle,
-                
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(
@@ -101,7 +103,6 @@ class BlogDetailsPage extends StatelessWidget {
                     fontWeight: FontWeight.normal),
               ),
             )
-        
           ]),
         ),
       ),

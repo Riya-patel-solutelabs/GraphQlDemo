@@ -9,9 +9,7 @@ part of 'blog_model.dart';
 BlogModel _$BlogModelFromJson(Map<String, dynamic> json) => BlogModel(
       title: json['title'] as String?,
       excerpt: json['excerpt'] as String?,
-      content: json['content'] == null
-          ? null
-          : ContentModel.fromJson(json['content'] as Map<String, dynamic>),
+      content: json['content'] as String?,
       coverImage: json['coverImage'] == null
           ? null
           : CoverimageModel.fromJson(
